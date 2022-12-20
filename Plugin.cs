@@ -69,6 +69,9 @@ namespace InfiniteSaveFilesNS
 			var saveIndex = Int32.Parse(allSaves.Last().SaveId) + 1; // 0-indexed, so has to be incremented again for displaying
 			InfiniteSaveFiles.L.LogInfo($"last save id: {saveIndex}");
 			newSave.TextMeshPro.text = SokLoc.Translate("label_start_new_save", LocParam.Create("save_index", (saveIndex + 1).ToString()));
+			newSave.transform.localScale = Vector3.one;
+			newSave.transform.localPosition = Vector3.zero;
+			newSave.transform.localRotation = Quaternion.identity;
 			newSave.Clicked += (() =>
 			{
 				WorldManager.instance.Save(new SaveGame() { SaveId = saveIndex.ToString() });
