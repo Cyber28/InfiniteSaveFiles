@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace InfiniteSaveFilesNS
 {
-	[BepInPlugin("InfiniteSaveFiles", "InfiniteSaveFiles", "1.0.0")]
+	[BepInPlugin("InfiniteSaveFiles", "InfiniteSaveFiles", "1.0.1")]
 	public class InfiniteSaveFiles : BaseUnityPlugin
 	{
 		public static BepInEx.Logging.ManualLogSource L;
