@@ -65,8 +65,15 @@ namespace InfiniteSaveFilesNS
 			}
 			CustomButton newSave = UnityEngine.Object.Instantiate<CustomButton>(PrefabManager.instance.ButtonPrefab);
 			newSave.transform.SetParent(__instance.ButtonsParent);
-			allSaves.Sort((SaveGame x, SaveGame y) => Int32.Parse(x.SaveId) - Int32.Parse(x.SaveId)); // WHY CANT YOU CHAIN THESEEE
-			var saveIndex = Int32.Parse(allSaves.Last().SaveId) + 1; // 0-indexed, so has to be incremented again for displaying
+			//allSaves.Sort((SaveGame x, SaveGame y) => Int32.Parse(x.SaveId) - Int32.Parse(x.SaveId)); // WHY CANT YOU CHAIN THESEEE
+			var saveIndex;
+			allSaves.ForEach(allSave =>
+		 	{
+				if (Int32.TryParse(allSave.SaveId, out int tempSaveIndex) && tempSaveIndex > saveIndex)
+					saveIndex = tempSaveIndex;
+				
+			});
+			saveIndex++; // 0-indexed, so has to be incremented again for displaying
 			InfiniteSaveFiles.L.LogInfo($"last save id: {saveIndex}");
 			newSave.TextMeshPro.text = SokLoc.Translate("label_start_new_save", LocParam.Create("save_index", (saveIndex + 1).ToString()));
 			newSave.transform.localScale = Vector3.one;
